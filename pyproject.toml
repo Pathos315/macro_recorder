@@ -25,7 +25,7 @@ dependencies = [
 ]
 
 [project.scripts]
-macro-recorder = "src.cli:main"
+macro-recorder = "cli:main"
 
 [project.urls]
 "Homepage" = "https://github.com/Pathos315/macro_recorder"
