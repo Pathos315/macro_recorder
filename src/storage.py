@@ -1,6 +1,6 @@
 import json
-from typing import Any, Dict, List
 from pathlib import Path
+from typing import Any, Dict, List
 
 from src.config import logger
 from src.models import MacroEvent

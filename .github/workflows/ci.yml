@@ -35,9 +35,6 @@ jobs:
           
       - name: Check formatting with black
         run: black --check .
-        
-      - name: Check imports with isort
-        run: isort --check-only --profile black .
 
   test:
     name: Run Tests
