@@ -1,3 +1,7 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "macro_recorder"
 version = "0.1.0"
@@ -7,16 +11,37 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/Pathos315/macro_recorder"
 repository = "https://github.com/Pathos315/macro_recorder"
-documentation = "https://github.com/Pathos315/macro_recorder"
 keywords = ["macro", "recorder", "automation"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
 [tool.poetry.dependencies]
-# Core PyAutoGUI without OS-specific extras
-pyautogui = { version = "*", extras = [] }
+python = ">=3.9"
+pynput = "*"
+keyboard = "*"
+mouse = "*"
+iniconfig = "==2.1.0"
+packaging = "==25.0"
+pluggy = "==1.5.0"
+pyautogui = { version = "*", markers = "sys_platform != 'darwin'" }
+pyobjc = { version = "11.0", markers = "sys_platform == 'darwin'" }
+MouseInfo = { version = "0.1.3", markers = "sys_platform == 'darwin'" }
+PyGetWindow = { version = "0.0.9", markers = "sys_platform == 'darwin'" }
+PyMsgBox = { version = "1.0.9", markers = "sys_platform == 'darwin'" }
+python-xlib = { version = "*", markers = "sys_platform == 'linux'" }
+pywin32 = { version = "*", markers = "sys_platform == 'win32'" }
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-cov = "*"
+flake8 = "*"
+black = "*"
+isort = "*"
+bandit = "*"
+safety = "*"
 
 # OS-specific dependencies
 [tool.poetry.extras]
@@ -24,13 +49,32 @@ macos = ["pyobjc-core", "pyobjc-framework-Quartz"]
 linux = ["python3-xlib", "python-xlib"]
 windows = []
 
-[tool.poetry.scripts]
-macro-recorder = "cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = "test_*.py"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+macro-recorder = "cli:main"
+
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py39-{linux,macos,windows}, py310-{linux,macos,windows}, py311-{linux,macos,windows}
+
+[testenv]
+platform =
+    linux: linux
+    macos: darwin
+    windows: win32
+deps =
+    pytest
+    pytest-cov
+commands =
+    linux: pytest --cov=src tests/ -v {posargs} -k "not requires_macos and not requires_windows"
+    macos: pytest --cov=src tests/ -v {posargs} -k "not requires_linux and not requires_windows"
+    windows: pytest --cov=src tests/ -v {posargs} -k "not requires_linux and not requires_macos"
+"""
