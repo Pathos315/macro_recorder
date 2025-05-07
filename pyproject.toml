@@ -15,11 +15,14 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 [tool.poetry.dependencies]
-pynput = "*"
-pyautogui = "*"
-keyboard = "*"
-mouse = "*"
-requires-python = ">=3.9"
+# Core PyAutoGUI without OS-specific extras
+pyautogui = { version = "*", extras = [] }
+
+# OS-specific dependencies
+[tool.poetry.extras]
+macos = ["pyobjc-core", "pyobjc-framework-Quartz"]
+linux = ["python3-xlib", "python-xlib"]
+windows = []
 
 [tool.poetry.scripts]
 macro-recorder = "cli:main"
