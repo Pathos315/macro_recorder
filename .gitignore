@@ -1,0 +1,5 @@
+__pycache__/**
+poetry.lock
+macro_actions.json
+test_macro.json
+**.pyc
