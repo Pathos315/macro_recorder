@@ -4,3 +4,4 @@ macro_actions.json
 test_macro.json
 **.pyc
 .code-workspace
+macro_recorder.code-workspace
