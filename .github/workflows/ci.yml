@@ -52,6 +52,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: 'pip'
 
+      - name: Install in development mode
+        run: pip install -e .
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
