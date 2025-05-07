@@ -64,6 +64,9 @@ jobs:
           pip install pynput pyautogui keyboard mouse
 
       - name: Test with pytest
+        env:
+          DISPLAY: ":99.0"
+          CI: "true"
         run: |
           # Create basic test directory if it doesn't exist
           mkdir -p tests
