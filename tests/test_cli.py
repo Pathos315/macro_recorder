@@ -1,13 +1,8 @@
 import argparse
-import os
-import sys
 from unittest.mock import MagicMock, patch
 
-# Add parent directory to path to find CLI module
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 # Use absolute import
-from cli import MacroRecorderCLI, main
+from src.cli import MacroRecorderCLI, main
 
 
 class TestMacroRecorderCLI:
