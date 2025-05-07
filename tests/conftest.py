@@ -1,16 +1,10 @@
-# Create a mock Configuration class for tests
-from unittest.mock import patch
-
 import pytest
 
-from src.config import Configuration
 
+@pytest.fixture(autouse=True)
+def mock_display_manager(monkeypatch):
+    """Mock DisplayManager methods to return fixed values in tests."""
+    from src.config import DisplayManager
 
-@pytest.fixture
-def mock_config():
-    with patch("src.config.DisplayManager.get_screen_width", return_value=1920):
-        with patch("src.config.DisplayManager.get_screen_height", return_value=1080):
-            config = Configuration()
-            config.screen_width = 1920
-            config.screen_height = 1080
-            yield config
+    monkeypatch.setattr(DisplayManager, "get_screen_width", lambda: 1920)
+    monkeypatch.setattr(DisplayManager, "get_screen_height", lambda: 1080)

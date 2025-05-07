@@ -42,17 +42,25 @@ class DisplayManager:
 
     @staticmethod
     def get_screen_width() -> int:
-        """Get the screen width."""
-        import pyautogui
+        """Get the screen width, with fallback for headless environments."""
+        try:
+            import pyautogui
 
-        return pyautogui.size()[0]
+            return pyautogui.size()[0]
+        except Exception:
+            # Fallback for headless environments
+            return 1920
 
     @staticmethod
     def get_screen_height() -> int:
-        """Get the screen height."""
-        import pyautogui
+        """Get the screen height, with fallback for headless environments."""
+        try:
+            import pyautogui
 
-        return pyautogui.size()[1]
+            return pyautogui.size()[1]
+        except Exception:
+            # Fallback for headless environments
+            return 1080
 
     @staticmethod
     def set_cursor_position(x: int, y: int) -> None:

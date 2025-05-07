@@ -19,10 +19,14 @@ from src.models import (
 class TestMacroRecorder:
     def setup_method(self):
         """Set up test fixtures."""
-        self.config = Configuration()
-        # Mocking screen dimensions to avoid actual screen queries
-        self.config.screen_width = 1920
-        self.config.screen_height = 1080
+        # Create a mocked Configuration to avoid display queries
+        with patch("src.config.DisplayManager.get_screen_width", return_value=1920):
+            with patch(
+                "src.config.DisplayManager.get_screen_height", return_value=1080
+            ):
+                self.config = Configuration()
+
+        # Continue with existing setup
         self.config.min_move_distance = 5
         self.config.min_move_time = 0.02
 
