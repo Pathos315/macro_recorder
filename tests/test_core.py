@@ -1,15 +1,16 @@
-from unittest.mock import patch, MagicMock, ANY
-import time
-import threading
 import json
-from src.core import MacroRecorder, MacroPlayer
+import threading
+import time
+from unittest.mock import ANY, MagicMock, patch
+
 from src.config import Configuration
+from src.core import MacroPlayer, MacroRecorder
 from src.models import (
-    Position,
-    MouseButton,
-    MouseMoveEvent,
-    MouseButtonEvent,
     KeyboardEvent,
+    MouseButton,
+    MouseButtonEvent,
+    MouseMoveEvent,
+    Position,
 )
 
 

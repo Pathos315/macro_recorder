@@ -1,13 +1,10 @@
-import pytest
 import json
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+import pytest
+
+from src.models import MouseButton, MouseButtonEvent, MouseMoveEvent, Position
 from src.storage import MacroStorage
-from src.models import (
-    MouseMoveEvent,
-    MouseButtonEvent,
-    Position,
-    MouseButton,
-)
 
 
 class TestMacroStorage:

@@ -1,6 +1,13 @@
 import pytest
-from src.models import Position, MouseButton
-from src.models import MouseMoveEvent, MouseButtonEvent, MouseScrollEvent, KeyboardEvent
+
+from src.models import (
+    KeyboardEvent,
+    MouseButton,
+    MouseButtonEvent,
+    MouseMoveEvent,
+    MouseScrollEvent,
+    Position,
+)
 
 
 class TestPosition:

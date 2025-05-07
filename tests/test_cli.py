@@ -1,5 +1,6 @@
-from unittest.mock import patch, MagicMock
 import argparse
+from unittest.mock import MagicMock, patch
+
 from ..cli import MacroRecorderCLI, main
 
 

@@ -1,6 +1,7 @@
-from unittest.mock import patch, MagicMock, call
-from src.countdown import CountdownUI
+from unittest.mock import MagicMock, call, patch
+
 from src.config import Configuration
+from src.countdown import CountdownUI
 
 
 class TestCountdownUI:
