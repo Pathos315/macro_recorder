@@ -34,6 +34,8 @@ PyGetWindow = { version = "0.0.9", markers = "sys_platform == 'darwin'" }
 PyMsgBox = { version = "1.0.9", markers = "sys_platform == 'darwin'" }
 python-xlib = { version = "*", markers = "sys_platform == 'linux'" }
 pywin32 = { version = "*", markers = "sys_platform == 'win32'" }
+types-pyautogui = "^0.9.3.20241230"
+types-pynput = "^1.8.1.20250318"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"

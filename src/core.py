@@ -26,7 +26,7 @@ from src.storage import MacroStorage
 class MacroRecorder:
     """Records mouse and keyboard actions."""
 
-    def __init__(self, config: Configuration = None):
+    def __init__(self, config: Optional[Configuration] = None):
         """Initialize with optional configuration."""
         self.config = config or Configuration()
         self.events: List[MacroEvent] = []
@@ -113,7 +113,7 @@ class MacroRecorder:
         with self.lock:
             self.events.append(
                 MouseScrollEvent(
-                    timestamp=time(), position=position, scroll_amount=amount
+                    timestamp=time.time(), position=position, scroll_amount=amount
                 )
             )
 
@@ -162,7 +162,7 @@ class MacroRecorder:
 class MacroPlayer:
     """Plays back recorded mouse and keyboard actions."""
 
-    def __init__(self, config: Configuration = None):
+    def __init__(self, config: Optional[Configuration] = None):
         """Initialize with optional configuration."""
         self.config = config or Configuration()
         self.ui = CountdownUI(self.config)

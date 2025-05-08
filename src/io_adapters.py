@@ -28,11 +28,13 @@ class MouseInputAdapter(InputAdapter):
         config: Configuration,
     ):
         """Initialize with callback functions and configuration."""
+        from pynput.mouse import Listener
+
         self.on_move = on_move
         self.on_click = on_click
         self.on_scroll = on_scroll
         self.config = config
-        self.listener = None
+        self.listener: Listener | None = None
 
     def start_listening(self) -> None:
         """Start listening for mouse events."""
@@ -59,11 +61,17 @@ class MouseInputAdapter(InputAdapter):
             if 0 <= x < self.config.screen_width and 0 <= y < self.config.screen_height:
                 self.on_scroll(Position(x, y), dy)
 
-        self.listener = pynput_mouse.Listener(
-            on_move=handle_move, on_click=handle_click, on_scroll=handle_scroll
-        )
-        self.listener.start()
-        logger.info("Mouse input adapter started")
+        try:
+            self.listener = pynput_mouse.Listener(
+                on_move=handle_move, on_click=handle_click, on_scroll=handle_scroll
+            )
+            if self.listener:
+                self.listener.start()
+                logger.info("Mouse input adapter started")
+            else:
+                logger.error("Failed to create mouse listener")
+        except Exception as e:
+            logger.error(f"Error starting mouse listener: {e}")
 
     def stop_listening(self) -> None:
         """Stop listening for mouse events."""
@@ -81,7 +89,7 @@ class KeyboardInputAdapter(InputAdapter):
 
     def start_listening(self) -> None:
         """Start listening for keyboard events."""
-        import keyboard as keyboard_hooks
+        import keyboard as keyboard_hooks  # type: ignore
 
         def handle_key_event(e) -> None:
             """Handle keyboard event."""
@@ -132,7 +140,7 @@ class MouseKeyboardOutputAdapter(OutputAdapter):
 
     def move_mouse(self, position: Position, duration: float = 0.0) -> None:
         """Move the mouse to a position."""
-        import mouse
+        import mouse  # type: ignore
 
         mouse.move(position.x, position.y, absolute=True, duration=duration)
         logger.debug(f"Mouse moved to {position}")

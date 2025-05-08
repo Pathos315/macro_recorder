@@ -26,7 +26,7 @@ class CountdownUI:
 
         root = tk.Tk()
         root.attributes("-transparentcolor", self.config.countdown_background)
-        root.overrideredirect(1)  # Removes window borders
+        root.overrideredirect(True)  # Removes window borders
         root.geometry(f"{self.config.screen_width}x{self.config.screen_height}+0+0")
         root.attributes("-topmost", 1)
 

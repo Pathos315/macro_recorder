@@ -3,8 +3,9 @@ import signal
 import sys
 from time import sleep
 from types import FrameType
+from typing import Any, Callable
 
-import keyboard as keyboard_hooks
+import keyboard as keyboard_hooks  # type: ignore
 
 from src.config import Configuration, logger
 from src.core import MacroPlayer, MacroRecorder
@@ -20,16 +21,20 @@ class MacroRecorderCLI:
         self.player = MacroPlayer(self.config)
 
         # Set up signal handler for clean exits
-        signal.signal(signal.SIGINT, self.signal_handler)
+        signal.signal(signal.SIGINT, self.signal_handler)  # type: ignore
 
-    def signal_handler(self, sig: int, frame: FrameType) -> None:
+    def signal_handler(
+        self,
+        sig: int,
+        frame: FrameType | None,
+    ) -> None:
         """
         Handle interruption signals like Ctrl+C.
         Ensures clean exit with proper cleanup.
 
         Args:
             sig: Signal number
-            frame: Current stack frame
+            frame: Current stack frame or None
         """
         logger.info("\nInterrupted, cleaning up...")
         self.cleanup_keyboard_state()
