@@ -3,7 +3,6 @@ import signal
 import sys
 from time import sleep
 from types import FrameType
-from typing import Any, Callable
 
 import keyboard as keyboard_hooks  # type: ignore
 
