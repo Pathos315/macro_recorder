@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 # Use absolute import
-from src.cli import MacroRecorderCLI, main
+from src.cli import MacroRecorderCLI
 
 
 class TestMacroRecorderCLI:
@@ -146,18 +146,3 @@ class TestMacroRecorderCLI:
 
         # Verify player was used
         self.mock_player_instance.play.assert_called_once_with("test.json", 2.0)
-
-
-@patch("src.cli.MacroRecorderCLI")
-def test_main(mock_cli):
-    """Test main function."""
-    # Setup mock
-    mock_cli_instance = MagicMock()
-    mock_cli.return_value = mock_cli_instance
-
-    # Call the function
-    main()
-
-    # Verify CLI was created and run
-    mock_cli.assert_called_once()
-    mock_cli_instance.run.assert_called_once()

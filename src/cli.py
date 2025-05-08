@@ -114,18 +114,3 @@ class MacroRecorderCLI:
     def _run_play(self, filename: str, speed_factor: float) -> None:
         """Run the play command."""
         self.player.play(filename, speed_factor)
-
-
-# =====================================
-# Application Entry Point
-# =====================================
-
-
-def main() -> None:
-    """Main entry point for the macro recorder application."""
-    cli = MacroRecorderCLI()
-    cli.run()
-
-
-if __name__ == "__main__":
-    main()

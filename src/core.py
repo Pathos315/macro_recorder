@@ -235,12 +235,25 @@ class MacroPlayer:
 
     def _execute_event(self, event_dict: Dict[str, Any], current_time: float) -> None:
         """
-        Execute a single event.
-
+        Execute a recorded event based on the provided event dictionary.
+        This method handles different types of input events including mouse movements,
+        button clicks, scrolling, and keyboard actions.
         Args:
-            event_dict: The event dictionary
-            current_time: The current timestamp
+            event_dict (Dict[str, Any]): Dictionary containing event details with following possible structures:
+                For mouse movement: {"action": "move", "position": [x, y]}
+                For mouse press: {"action": "press", "position": [x, y], "button": str}
+                For mouse release: {"action": "release", "button": str}
+                For scrolling: {"action": "scroll", "scroll": int}
+                For keyboard: {"action": "key", "key": str, "event_type": str}
+            current_time (float): Current timestamp of the event execution
+        Returns:
+            None
+        Notes:
+            - Mouse movements include a small duration (0.01s) for smooth transitions
+            - For mouse presses, the method checks for double-clicks
+            - Keyboard events distinguish between key press and release actions
         """
+
         action = event_dict["action"]
 
         if action == "move":
