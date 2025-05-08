@@ -6,3 +6,4 @@ test_macro.json
 .code-workspace
 macro_recorder.code-workspace
 .coverage
+coverage.xml
